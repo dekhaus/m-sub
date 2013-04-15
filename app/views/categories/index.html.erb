@@ -1,0 +1,37 @@
+<h1>Listing categories</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Created At</th>
+    <th>Updated At</th>
+  </tr>
+
+<% @categories.each do |category| %>
+  <tr>
+    <td><%= category.name %></td>
+    <td><%= category.created_at %></td>
+    <td><%= category.updated_at %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= javascript_tag do %>
+			
+	$(document).ready(function(){	
+
+		var getCategories = function() {
+			$.ajax({
+				url: '/categories/list',
+				type: 'get',
+				success: function(data) {
+					$('#categories').html(data);
+				}				
+			});
+		};
+		
+		//setInterval(getProducts, 3000);
+	});
+<% end %>
+

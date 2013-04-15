@@ -1,0 +1,37 @@
+<h1>Listing products</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Created At</th>
+    <th>Updated At</th>
+  </tr>
+
+<% @products.each do |product| %>
+  <tr>
+    <td><%= product.name %></td>
+    <td><%= product.created_at %></td>
+    <td><%= product.updated_at %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= javascript_tag do %>
+			
+	$(document).ready(function(){	
+
+		var getProducts = function() {
+			$.ajax({
+				url: '/products/list',
+				type: 'get',
+				success: function(data) {
+					$('#products').html(data);
+				}				
+			});
+		};
+		
+		//setInterval(getProducts, 3000);
+	});
+<% end %>
+
